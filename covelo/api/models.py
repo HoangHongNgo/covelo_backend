@@ -2,20 +2,21 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.utils.translation import gettext_lazy as _
 
-
-class Bicycle(models.Model):
-    bicycle_id = models.CharField(max_length=50, unique=True, default='')
-    is_good = models.BooleanField()
-
-
 class Station(models.Model):
     location = models.CharField(max_length=30)
     capacity = models.IntegerField()
 
 
 class Locker(models.Model):
-    bicycle = models.ForeignKey(Bicycle, on_delete=models.CASCADE)
+    locker_id = models.CharField(max_length=30, unique=True, default='')
+    is_locked = models.BooleanField(default=False)
     station = models.ForeignKey(Station, on_delete=models.CASCADE, default='')
+
+
+class Bicycle(models.Model):
+    bicycle_id = models.CharField(max_length=30, unique=True, default='')
+    is_good = models.BooleanField()
+    locker = models.OneToOneField(Locker, on_delete=models.CASCADE, null=True)
 
 
 class CustomUserManager(BaseUserManager):

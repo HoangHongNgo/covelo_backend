@@ -1,3 +1,4 @@
+from .models import Locker
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from .models import Bicycle, Station, Locker
@@ -27,19 +28,22 @@ class CustomUserSerializer(serializers.ModelSerializer):
 class LockerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Locker
-        fields = ('id', 'station', 'bicycle')
+        fields = '__all__'
 
 
 class StationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Station
-        fields = ('id', 'location', 'capacity')
+        fields = '__all__'
 
 
 class BicycleSerializer(serializers.ModelSerializer):
     locker = LockerSerializer()
-    station = StationSerializer()
+    station = serializers.SerializerMethodField()
 
     class Meta:
         model = Bicycle
-        fields = ('id', 'bicycle_id', 'is_good', 'locker', 'station')
+        fields = ['bicycle_id', 'is_good', 'locker', 'station']
+
+    def get_station(self, obj):
+        return obj.locker.station.location if obj.locker else None
