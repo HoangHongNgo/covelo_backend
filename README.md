@@ -26,7 +26,7 @@ Run the server:
 python manage.py runserver
 ```
 
-Customize database connection in **setting.py**:
+Customize database connection in **settings.py**:
 
 ```python
 DATABASES = {
