@@ -25,3 +25,9 @@ Run the server:
 ```bash
 python manage.py runserver
 ```
+
+To access the API documentation:
+
+```bash
+http://localhost:8000/docs/
+```
