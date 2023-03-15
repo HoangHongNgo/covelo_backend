@@ -26,6 +26,15 @@ Run the server:
 python manage.py runserver
 ```
 
+Customize database connection in **setting.py**:
+
+```python
+DATABASES = {
+    'default': {
+    }
+}
+```
+
 To access the API documentation:
 
 ```bash
