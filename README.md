@@ -20,6 +20,11 @@ Once the virtual environment is activated, you can install the packages listed i
 pip install -r requirements.txt
 ```
 
+Update the requirements.txt by:
+```bash
+pip freeze > requirements.txt
+```
+
 Run the server:
 
 ```bash
